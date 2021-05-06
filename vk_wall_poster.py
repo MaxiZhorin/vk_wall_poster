@@ -12,7 +12,7 @@ from dotenv import load_dotenv
 def add_watermark(name_photo):
     watermark = Image.open('logo.png')
     im = Image.open(name_photo)
-    im.paste(watermark, (int(im.width / 4), int(im.height * 0.9)), watermark)
+    im.paste(watermark, (int(im.width / 2) - int(watermark.width / 2), int(im.height * 0.9)), watermark)
     im.save(name_photo)
 
 
@@ -59,5 +59,4 @@ if __name__ == '__main__':
     session = vk.AuthSession(os.getenv('app_id'), os.getenv("phone"), os.getenv("password"),
                              scope='wall,groups,offline,photos')
     vk_api = vk.API(session, v='5.95', lang='ru', timeout=10)
-
     send_post_wall()
