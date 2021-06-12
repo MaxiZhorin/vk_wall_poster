@@ -1,7 +1,7 @@
 import json
 from os import listdir
 import requests
-import vk
+import vk_api
 import random
 import os
 import time
@@ -58,7 +58,9 @@ if __name__ == '__main__':
     BASEDIR = os.path.abspath(os.path.dirname(__file__))
     load_dotenv(os.path.join(BASEDIR, '.env'))
     # Подключаем env и авторизуемся
+    vk.logger.setLevel('DEBUG')
     session = vk.AuthSession(os.getenv('app_id'), os.getenv("phone"), os.getenv("password"),
-                             scope='wall,groups,offline,photos')
+                             scope='groups,manage,wall,photos')
+
     vk_api = vk.API(session, v='5.95', lang='ru', timeout=10)
     send_post_wall()
